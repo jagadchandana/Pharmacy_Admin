@@ -12,6 +12,7 @@
 
     <!-- Custom fonts for this template-->
     <x-libraries.styles />
+    @stack('styles')
 </head>
 
 <body id="page-top">
@@ -24,6 +25,9 @@
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
             <!-- Main Content -->
+            <!-- Topbar -->
+            <x-components.header />
+            <!-- End of Topbar -->
                 {{ $slot }}
             <!-- End of Main Content -->
 
@@ -58,13 +62,17 @@
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">
                         Cancel
                     </button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                         <button class="btn btn-primary" type="submit">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     <x-libraries.scripts />
+    @stack('scripts')
 </body>
 
 </html>

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\Admin\AdminUserController;
+use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/admin-users', [AdminUserController::class, 'index'])->name('admin-users');
+// profile
+Route::get('/profile', [UserProfileController::class, 'index'])->name('profile');
 
 require __DIR__.'/auth.php';

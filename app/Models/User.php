@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\UserMeta\AdminUserMeta;
+use App\Models\UserMeta\PublicUserMeta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +14,10 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    const STATUS = [
+        'ACTIVE' => 1,
+        'INACTIVE' => 0,
+    ];
     /**
      * The attributes that are mass assignable.
      *
@@ -19,9 +25,24 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'status',
         'email',
         'password',
     ];
+    /**
+     * @return [type]
+     */
+    public function adminUser()
+    {
+        return $this->hasOne(AdminUserMeta::class);
+    }
+    /**
+     * @return [type]
+     */
+    public function publicUser()
+    {
+        return $this->hasOne(PublicUserMeta::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
