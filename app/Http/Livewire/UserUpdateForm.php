@@ -28,6 +28,7 @@ class UserUpdateForm extends Component
     {
         $this->UserProfileController = $UserProfileController;
         $this->adminUserRepository = $adminUserRepository;
+        $this->user = $this->adminUserRepository->findById(auth()->user()->id);
     }
     /**
      * @return [type]
